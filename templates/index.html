@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <style>
+        .buttons-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .button-container {
+            width: 48%;
+        }
+
+        .portfolio-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .portfolio-item {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .portfolio-image {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .portfolio-description {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .show-description-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>My Profile</h1>
+    </header>
+
+    <main>
+        <div class="profile-image">
+            <img src="{{ url_for('static', filename='images/myFoto.png') }}" alt="Fanes Setiawan">
+        </div>
+
+        <div class="profile-info">
+            <h2>Fanes Setiawan</h2>
+            <p>Mobile Developer</p>
+            <p>Location: Yogyakarta</p>
+            <p>Contact: fanes.setiawan1401@gmail.com</p>
+            <p>GitHub: <a href="https://github.com/fanes-setiawan" target="_blank">https://github.com/fanes-setiawan</a></p>
+        </div>
+
+        <div class="buttons-row">
+            <div class="button-container">
+                <h3>Skills</h3>
+                <button id="toggleSkills">Show Skills</button>
+                <ul id="skillsList" style="display: none;">
+                    <li>Python</li>
+                    <li>Dart</li>
+                    <li>HTML/CSS</li>
+                </ul>
+            </div>
+
+            <div class="button-container">
+                <h3>Portfolio</h3>
+                <button id="togglePortfolio">Show Portfolio</button>
+                <div id="portfolioList" style="display: none;" class="portfolio-container">
+                    <div class="portfolio-item" id="portfolio1">
+                        <img src="{{ url_for('static', filename='images/portofolio1.png') }}" class="portfolio-image" alt="Portfolio 1">
+                        <button class="show-description-button">Show Description</button>
+                        <div class="portfolio-description">
+                            <h4>IOT CONTROL</h4>
+                            <p>Firebase Authentication</p>
+                            <p>Firebase Realtime Database</p>
+                            <p>Firestore Database</p>
+                            <p>OpenWeatherMAP APIs</p>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item" id="portfolio2">
+                        <img src="{{ url_for('static', filename='images/portofolio2.png') }}" class="portfolio-image" alt="Portfolio 2">
+                        <button class="show-description-button">Show Description</button>
+                        <div class="portfolio-description">
+                            <h4>Building OVO App UI with Flutter</h4>
+                            <p>Flutter Framework</p>
+                            <p>Focuses on display design and user interface settings for OVO applications, such as Home, Financial, Pay, Inbox, and Profile pages.</p>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item" id="portfolio3">
+                        <img src="{{ url_for('static', filename='images/portofolio3.png') }}" class="portfolio-image" alt="Portfolio 3">
+                        <button class="show-description-button">Show Description</button>
+                        <div class="portfolio-description">
+                            <h4>Fugi_movie_app_team5</h4>
+                            <p>This minibootcamp is organized by FUGI (Flutter User Group Indonesia)</p>
+                            <p>Design and implement attractive and responsive user interfaces (UI).</p>
+                            <p>Teamwork</p>
+                            <p>Flutter version 3.0.3</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Thank You
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var skillsButton = document.getElementById("toggleSkills");
+            var skillsList = document.getElementById("skillsList");
+
+            skillsButton.addEventListener("click", function () {
+                if (skillsList.style.display === "none" || skillsList.style.display === "") {
+                    skillsList.style.display = "block";
+                    skillsButton.textContent = "Hide Skills";
+                } else {
+                    skillsList.style.display = "none";
+                    skillsButton.textContent = "Show Skills";
+                }
+            });
+
+            var portfolioButton = document.getElementById("togglePortfolio");
+            var portfolioList = document.getElementById("portfolioList");
+
+            portfolioButton.addEventListener("click", function () {
+                if (portfolioList.style.display === "none" || portfolioList.style.display === "") {
+                    portfolioList.style.display = "flex";
+                    portfolioButton.textContent = "Hide Portfolio";
+                } else {
+                    portfolioList.style.display = "none";
+                    portfolioButton.textContent = "Show Portfolio";
+                }
+            });
+
+            // Menambahkan event listener untuk setiap item portofolio
+            var portfolioItems = document.querySelectorAll(".portfolio-item");
+            portfolioItems.forEach(function (item) {
+                var descriptionButton = item.querySelector(".show-description-button");
+                var description = item.querySelector(".portfolio-description");
+
+                descriptionButton.addEventListener("click", function () {
+                    if (description.style.display === "none" || description.style.display === "") {
+                        description.style.display = "block";
+                    } else {
+                        description.style.display = "none";
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
